@@ -40,7 +40,7 @@ int main()
 
     printf("The number of distinct number: %d\n",num_count);
     printf("The distinct numbers are: ");
-    for(int i=0; i<=num_count;i++)
+    for(int i=0; i<num_count;i++)
     {
         printf("%d ",d_num[i]);
     }

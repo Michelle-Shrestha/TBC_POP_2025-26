@@ -2,10 +2,10 @@
 
 int main()
 {
-    int row=2, col=3;
+    int row=3, col=4;
     float matrix[row][col],sum[col];
 
-    printf("Enter a 3-by-4 matrix row by row: ");
+    printf("Enter a 3-by-4 matrix row by row: \n");
     for(int i=0;i<row;i++)
     {
         for(int j=0; j<col;j++)

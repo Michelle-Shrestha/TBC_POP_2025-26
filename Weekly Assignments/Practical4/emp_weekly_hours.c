@@ -2,9 +2,9 @@
 
 int main()
 {
-    int total_hours[8],temp_hours[8], temp_emp[8],hours,emp;
-    //employees working hours (7days)
-    //during initializing values are kept
+    int total_hours[8]={0},total_emp[8],temp_hours,temp_emp;
+    //8 employees working hours (7days)
+    //when values are given, it should be done during initialization
     int w_hours[8][7]=
     {
         {2,4,3,4,5,8,8},
@@ -19,22 +19,40 @@ int main()
 
     for (int i=0; i<8;i++)
     {
-        for(int j=0; i<7;i++)
+        for(int j=0; j<7;j++)
         {
             total_hours[i]+=w_hours[i][j];
         }
+        //priting emp with working hours
+        total_emp[i]=i;
+        //printf("Employee %d total working hour: %d\n",i,total_hours[i]);
     }
 
-    //empp with their working hours in descending order
+    printf("\n");
+   
+    //Ordering empp with their working hours in descending order
     for(int i=0;i<8;i++)
     {
-        if(temp_emp[i]>temp_emp[i+1])
+        for(int j =0; j<8;j++)
         {
-            
+            if(total_hours[i]>total_hours[j])
+            {
+                temp_hours = total_hours[j];
+                total_hours[j] = total_hours[i];
+                total_hours[i]= temp_hours;
+
+                temp_emp=total_emp[j];
+                total_emp[j]= total_emp[i];
+                total_emp[i]=temp_emp;
+            }
         }
-        
     }
-    
+
+    //printing in descending order
+    for(int i=0;i<8;i++)
+    {
+         printf("Employee %d total working hour: %d\n",total_emp[i],total_hours[i]);
+    }
     
 
     return 0;
