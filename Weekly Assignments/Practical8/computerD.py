@@ -1,5 +1,5 @@
 # Task 1.7
-class ComputerB:
+class ComputerD:
 
     def __init__(self,name,price):
         #initialising instance/member variable
