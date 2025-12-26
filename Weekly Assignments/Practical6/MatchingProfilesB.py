@@ -1,3 +1,11 @@
+def user_input():
+    sus=[]
+    cri=[]
+    #Taking input from the user in string and spliting them by space
+    sus=input("Enter the 10 DNA of the suspect: ").split(" ")
+    cri=input("Enter the 10 DNA of the criminal: ").split(" ")
+    return sus,cri
+
 def matchingProfiles(cri,sus):
     match = True
     for i in range (10):
@@ -9,8 +17,7 @@ def matchingProfiles(cri,sus):
     return match
 
 def main():
-    sus_Dna = [2.3, 3.3, 4.5, 6.7, 7.8, 2.1, 3.2, 4.3, 5.2, 6.5]
-    cri_Dna = [2.3, 3.3, 4.5, 6.7, 7.8, 2.1, 3.2, 4.3, 5.2, 6.5]
+    sus_Dna, cri_Dna = user_input()
     match= matchingProfiles(sus_Dna,cri_Dna)
     if match == True:
         print("Repeated offender: Two profile matches")
