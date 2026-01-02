@@ -34,12 +34,20 @@ class StockItem:
     #Getters
     def getStockCode(self):
         return self.__stockCode
+    
     def getItemQuantity(self):
         return self.__itemQuantity
+    
     def getItemPrice(self):
         #using python build in function
         #rounding price to two decimal example: 20.0/20.12
         return round(self.__itemPrice,2)
+    
+    def getStockName(self):
+        return "Unknown Stock Name"
+    
+    def getStockDescription(self):
+        return "Unknown Stock Description"
     
     #Methods 
 
@@ -68,12 +76,6 @@ class StockItem:
         if qty>0 and qty<=self.__itemQuantity:
             self.__itemQuantity-=qty
             return(f"{qty} Quantity Successfully Sold!!!\nCurrent Quantity: {self.__itemQuantity}")
-
-    def getStockName(self):
-        return "Unknown Stock Name"
-    
-    def getstockDescription(self):
-        return "Unknown Stock Description"
     
     #dunder method (displays the item information)
     def __str__(self):
