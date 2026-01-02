@@ -12,6 +12,8 @@ class StockItem:
         if itemQuantity<0:
             print(f"No Quantity: {self.__itemQuantity}")
             raise ValueError("Item out of stock!!!")
+        if itemQuantity>100:
+            raise ValueError("Inalid Quantity!!!\nQuantity must be less than or equal to 100!!!")
 
     #Setters
     def setStockCode(self,stockCode):
@@ -22,6 +24,8 @@ class StockItem:
         #Raise error if quanty is negative else set quantity 
         if itemQuantity<0:
             raise ValueError ("Inalid Quantity!!!\nQuantity must be more than or equal to 1!!!")
+        if itemQuantity>100:
+            raise ValueError ("Inalid Quantity!!!\nQuantity must be less than or equal to 100!!!")
         self.__itemQuantity=itemQuantity
         return "Successfully set new quantity"
 
@@ -83,7 +87,7 @@ class StockItem:
             f"\n\nPrinting item stock information: \n"
             f"Stock Category: {self.stockCategory}\n"
             f"Stock type: {self.getStockName()}\n"
-            f"Description: {self.getstockDescription()}\n"
+            f"Description: {self.getStockDescription()}\n"
             f"Stock Code: {self.getStockCode()}\n"
             f"Price Without VAT: {self.getItemPrice()}\n"
             f"Price With VAT: {self.calculate_VAT()}\n"
@@ -160,7 +164,8 @@ def menu():
                 price = float(input("Enter the item price: "))
                 #Creating class object
                 obj = StockItem(code,qty,price)
-                print(f"\nAdded Successfully\n")
+                print(f"\nCreating a stock with {obj.getItemQuantity()} units Unknown item,\
+price {obj.getItemPrice()} each, and item code {obj.getStockCode()}\n")
             
             elif choice == 2:
                 #If no obj created before modifying
