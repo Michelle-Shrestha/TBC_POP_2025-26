@@ -52,14 +52,16 @@ class StockItem:
     
     def getStockDescription(self):
         return "Unknown Stock Description"
-    
+        #Vat method
+    def getVAT(self):
+        return 17.5
+      
     #Methods 
-
     #Calculating price with vat
-    def calculate_VAT(self,vat=17.5):
-        new_price = self.__itemPrice * (1+ vat/100)
+    def calculate_VAT(self):
+        new_price = self.__itemPrice * (1+ (self.getVAT())/100)
         return round(new_price,2)
-    
+
     def increaseStock(self,qty):
         ItemCapacity= 100-self.__itemQuantity
         if qty<1:
