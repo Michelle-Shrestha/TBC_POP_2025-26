@@ -3,7 +3,7 @@
 class StockItem:
     stockCategory= "Car Accessories"
     #Constructor with dynamic type
-    def __init__(self,stockCode:str=None,itemQuantity:int = 0,itemPrice:float = 0):
+    def __init__(self,stockCode:str,itemQuantity:int = 0,itemPrice:float = 0):
         self.__stockCode = stockCode
         self.__itemQuantity= itemQuantity
         self.__itemPrice = itemPrice
@@ -67,6 +67,7 @@ class StockItem:
         return 17.5
       
     #Methods 
+
     #Calculating price with vat
     def calculate_VAT(self):
         new_price = self.__itemPrice * (1+ (self.getVAT())/100)
@@ -137,7 +138,7 @@ class NavSys(StockItem):
     def getStockDescription(self):
         return "GeoVision Sat Nav"
     
-    #overriding Base class __str__() method
+    #Calling Base class __str__() method with sub class brand info
     def __str__(self):
         return super().__str__() + f"Brand: {self.getBrand()}\n"
 
@@ -179,7 +180,7 @@ def login():
             log={}
             for line in fp:
                 #splits the line by | 
-                userN,pw = line.strip().split("|")
+                userN,pw = line.split("|")
                 log[userN]= pw
             while True:
                 userName = input("Enter your username: ")
