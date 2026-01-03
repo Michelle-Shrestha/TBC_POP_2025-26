@@ -14,8 +14,9 @@ class StockItem:
 
         #Remainder for no quantity and invalid price
         if itemQuantity<0:
-            print(f"No Quantity: {self.__itemQuantity}")
-            raise ValueError("Item out of stock!!!")
+            print(f"Invalid Quantity: {self.__itemQuantity}")
+            raise ValueError("Quantity must be greater than 0!!!")
+
         if itemQuantity>100:
             raise ValueError("Inalid Quantity!!!\nQuantity must be less than or equal to 100!!!")
         if itemPrice<=0:
@@ -61,12 +62,14 @@ class StockItem:
     
     def getStockDescription(self):
         return "Unknown Stock Description"
-    
+    #Vat method
+    def getVAT(self):
+        return 17.5
+      
     #Methods 
-
     #Calculating price with vat
-    def calculate_VAT(self,vat=17.5):
-        new_price = self.__itemPrice * (1+ vat/100)
+    def calculate_VAT(self):
+        new_price = self.__itemPrice * (1+ (self.getVAT())/100)
         return round(new_price,2)
     
     def increaseStock(self,qty):
@@ -213,7 +216,7 @@ def menu():
                 #Creating class object
                 obj = NavSys(code,brand,qty,price)
                 print(f"\nCreating a stock with {obj.getItemQuantity()} units {obj.getStockName()},\
-price {obj.getItemPrice()} each, item code {obj.getStockCode()} and brand {obj.getBrand()}\n")
+ price {obj.getItemPrice()} each, item code {obj.getStockCode()} and brand {obj.getBrand()}\n")
             
             #Sub choice for setting new info
             elif choice == 2:
