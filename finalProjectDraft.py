@@ -8,17 +8,27 @@ class StockItem:
         self.__itemQuantity= itemQuantity
         self.__itemPrice = itemPrice
 
-        #Remainder for no quantity 
+        #If no stock code added
+        if not stockCode:
+            raise ValueError ("Please enter the stock code!!!")
+
+        #Remainder for no quantity and invalid price
         if itemQuantity<0:
-            print(f"No Quantity: {self.__itemQuantity}")
-            raise ValueError("Item out of stock!!!")
+            print(f"Invalid Quantity: {self.__itemQuantity}")
+            raise ValueError("Quantity must be greater than 0!!!")
+
         if itemQuantity>100:
             raise ValueError("Inalid Quantity!!!\nQuantity must be less than or equal to 100!!!")
+        if itemPrice<=0:
+            raise ValueError("Invalid Price!!! Price must be greater than 0")
 
     #Setters
     def setStockCode(self,stockCode):
+        #if empty value passed while setting new stock code
+        if not stockCode:
+            raise ValueError ("Please enter a valid stock code")
         self.__stockCode=stockCode
-        return "Successfully set new code"
+        #return "Successfully set new code"
 
     def setItemQuantity(self,itemQuantity):
         #Raise error if quanty is negative else set quantity 
@@ -27,13 +37,11 @@ class StockItem:
         if itemQuantity>100:
             raise ValueError ("Inalid Quantity!!!\nQuantity must be less than or equal to 100!!!")
         self.__itemQuantity=itemQuantity
-        return "Successfully set new quantity"
 
     def setItemPrice(self,itemPrice):
         if itemPrice<=0:
-            raise ValueError ("Invalid Price!!!\n Price cannot be negative!!!")
+            raise ValueError ("Invalid Price!!!\n Price must be greater than 0!!!")
         self.__itemPrice = itemPrice
-        return "Successfully set new price"
 
     #Getters
     def getStockCode(self):
@@ -52,6 +60,7 @@ class StockItem:
     
     def getStockDescription(self):
         return "Unknown Stock Description"
+    
         #Vat method
     def getVAT(self):
         return 17.5
@@ -140,7 +149,9 @@ def login():
                     password = input("Enter your password: ")
                     #if userName exist then checks if password matches or not
                     if log[userName]==password:
-                        print("\n     Login Successfull       \n")
+                        print("\n Login Successful       \n")
+                        #Prints greeting to the current user
+                        print(f" Welcome, {userName.capitalize()}")
                         return True
                     else:
                         print("Incorrect Password!!!\n")
@@ -175,23 +186,36 @@ price {obj.getItemPrice()} each, and item code {obj.getStockCode()}\n")
                     print("\nItem doesnot exist. Please add an item!!!\n")
                     #to go to the main display menu
                     continue
+
                 DisplayModifyingItems()
                 #Sub choice for choice modifying items
                 subChoice = int(input("Enter your chocie: "))
                 if subChoice ==1:
                     newStockCode = input("Enter the new code for the item: ")
-                    print(f"\n{obj.setStockCode(newStockCode)}\n")
+                    #Settng New Code
+                    obj.setStockCode(newStockCode)
+                    print(f"\nSet New Code: {obj.getStockCode()}\n")
+
                 elif subChoice ==2:
                     newQty = int(input("Enter the new quantity for the item: "))
-                    print(f"\n{obj.setItemQuantity(newQty)}]n")
+                    #setting new code
+                    obj.setItemQuantity(newQty)
+                    print(f"\nSetting New Quantity: {obj.getItemQuantity()}\n")
+
                 elif subChoice ==3:
                     newPrice = float(input("Enter the new price for the item: "))
-                    print(f"\n{obj.setItemPrice(newPrice)}\n")
+                    #setting new price
+                    obj.setItemPrice(newPrice)
+                    print(f"\nSetting New Price: {obj.getItemPrice()} per unit\n")
+
                 elif subChoice ==4:
                     continue
+                    
+                #if choose beyond the sub option
                 else:
                     print("\nPlease choose from the given option 1-4 only!!!\n")
 
+            # Main choice
             elif choice==3:
                 if obj is None: 
                     print("\nItem doesnot exist. Please add an item!!!\n")
@@ -218,11 +242,13 @@ price {obj.getItemPrice()} each, and item code {obj.getStockCode()}\n")
             elif choice==6:
                 print("Exiting the program.....\nThank You\n")
                 break
-            else:
-                print("Please choose from the given option 1-6 only!!!")   
-                continue
-                    
 
+            else:
+                #If choose beyond the givenoption
+                print("Please choose from the given option 1-6 only!!!")   
+                continue    
+
+        #Error handling for the given Errors
         except ValueError as ve:
             print (f"The Error is: {ve}")
         except Exception as e:

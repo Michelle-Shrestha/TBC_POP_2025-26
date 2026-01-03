@@ -28,7 +28,7 @@ class StockItem:
         if not stockCode:
             raise ValueError ("Please enter a valid stock code")
         self.__stockCode=stockCode
-        return "Successfully set new code"
+        #return "Successfully set new code"
 
     def setItemQuantity(self,itemQuantity):
         #Raise error if quanty is negative else set quantity 
@@ -37,13 +37,11 @@ class StockItem:
         if itemQuantity>100:
             raise ValueError ("Inalid Quantity!!!\nQuantity must be less than or equal to 100!!!")
         self.__itemQuantity=itemQuantity
-        return "Successfully set new quantity"
 
     def setItemPrice(self,itemPrice):
         if itemPrice<=0:
             raise ValueError ("Invalid Price!!!\n Price must be greater than 0!!!")
         self.__itemPrice = itemPrice
-        return "Successfully set new price"
 
     #Getters
     def getStockCode(self):
@@ -62,6 +60,7 @@ class StockItem:
     
     def getStockDescription(self):
         return "Unknown Stock Description"
+    
     #Vat method
     def getVAT(self):
         return 17.5
@@ -118,14 +117,12 @@ class NavSys(StockItem):
         if not brand:
             raise ValueError("No brand Added!!! Please enter a valid Brand")
 
-
     #setter
     def setBrand(self,brand):
         #if not brand name given (empty argument passed)
         if not brand:
             raise ValueError ("Please enter a brand name!!!")
         self.__brand = brand
-        return "New Brand name set successfully"
     
     #getter
     def getBrand(self):
@@ -189,7 +186,9 @@ def login():
                     password = input("Enter your password: ")
                     #if userName exist then checks if password matches or not
                     if log[userName]==password:
-                        print("\n     Login Successfull       \n")
+                        print("\n Login Successful      \n")
+                        #Prints greeting to the current user
+                        print(f" Welcome, {userName.capitalize()}")
                         return True
                     else:
                         print("Incorrect Password!!!\n")
@@ -216,6 +215,7 @@ def menu():
                 brand = input("Enter the brand name: ")
                 #Creating class object
                 obj = NavSys(code,brand,qty,price)
+                # \ is used for continuing code in next line
                 print(f"\nCreating a stock with {obj.getItemQuantity()} units {obj.getStockName()},\
  price {obj.getItemPrice()} each, item code {obj.getStockCode()} and brand {obj.getBrand()}\n")
             
@@ -226,26 +226,42 @@ def menu():
                     print("\nItem doesnot exist. Please add an item!!!\n")
                     #to go to the main display menu
                     continue
+
                 DisplayModifyingItems()
                 #Sub choice for choice modifying items
                 subChoice = int(input("Enter your chocie: "))
                 if subChoice ==1:
                     newStockCode = input("Enter the new code for the item: ")
-                    print(f"\n{obj.setStockCode(newStockCode)}\n")
+                    #Settng New Code
+                    obj.setStockCode(newStockCode)
+                    print(f"\nSet New Code: {obj.getStockCode()}\n")
+
                 elif subChoice ==2:
                     newQty = int(input("Enter the new quantity for the item: "))
-                    print(f"\n{obj.setItemQuantity(newQty)}]n")
+                    #setting new code
+                    obj.setItemQuantity(newQty)
+                    print(f"\nSetting New Quantity: {obj.getItemQuantity()}\n")
+
                 elif subChoice ==3:
                     newPrice = float(input("Enter the new price for the item: "))
-                    print(f"\n{obj.setItemPrice(newPrice)}\n")
+                    #setting new price
+                    obj.setItemPrice(newPrice)
+                    print(f"\nSetting New Price: {obj.getItemPrice()} per unit\n")
+
                 elif subChoice==4:
                     newBrandName= input("Enter the new brand name: ")
-                    print(f"\n{obj.setBrand(newBrandName)}\n")
+                    #Setting new brand name
+                    obj.setBrand(newBrandName)
+                    print(f"\nSetting New Brand Name: {obj.getBrand()}\n")
+
                 elif subChoice ==5:
                     continue
+
+                #if choose beyond the sub option    
                 else:
                     print("\nPlease choose from the given option 1-4 only!!!\n")
 
+            #Main choice
             elif choice==3:
                 if obj is None: 
                     print("\nItem doesnot exist. Please add an item!!!\n")
@@ -272,11 +288,13 @@ def menu():
             elif choice==6:
                 print("Exiting the program.....\nThank You\n")
                 break
+
+            #if choose beyond the main option
             else:
                 print("Please choose from the given option 1-6 only!!!")   
                 continue
                     
-
+        #Error handling for the given Errors
         except ValueError as ve:
             print (f"The Error is: {ve}")
         except Exception as e:
