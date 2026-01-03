@@ -180,7 +180,7 @@ def login():
             log={}
             for line in fp:
                 #splits the line by | 
-                userN,pw = line.split("|")
+                userN,pw = line.strip().split("|")
                 log[userN]= pw
             while True:
                 userName = input("Enter your username: ")
