@@ -15,10 +15,10 @@ class StockItem:
         #Remainder for no quantity and invalid price
         if itemQuantity<0:
             print(f"Invalid Quantity: {self.__itemQuantity}")
-            raise ValueError("Quantity must be greater than 0!!!")
+            raise ValueError("Quantity must be greater than or equal to 0!!!")
 
         if itemQuantity>100:
-            raise ValueError("Inalid Quantity!!!\nQuantity must be less than or equal to 100!!!")
+            raise ValueError("Invalid Quantity!!!\nQuantity must be less than or equal to 100!!!")
         if itemPrice<=0:
             raise ValueError("Invalid Price!!! Price must be greater than 0")
 
@@ -32,10 +32,10 @@ class StockItem:
 
     def setItemQuantity(self,itemQuantity):
         #Raise error if quanty is negative else set quantity 
-        if itemQuantity<0:
-            raise ValueError ("Inalid Quantity!!!\nQuantity must be more than or equal to 1!!!")
+        if itemQuantity<=0:
+            raise ValueError ("Invalid Quantity!!!\nQuantity must be more than or equal to 1!!!")
         if itemQuantity>100:
-            raise ValueError ("Inalid Quantity!!!\nQuantity must be less than or equal to 100!!!")
+            raise ValueError ("Invalid Quantity!!!\nQuantity must be less than or equal to 100!!!")
         self.__itemQuantity=itemQuantity
 
     def setItemPrice(self,itemPrice):
@@ -79,8 +79,10 @@ class StockItem:
             raise ValueError(f"Quantity Exceeds maximum holding capacity !!! You can add additional {ItemCapacity} only.")
         #Checks whether the total Item quantity is valid or not (1-100)
         if qty>0 and qty<=ItemCapacity:
+            #if condition is met adds quantity and returns true else return false
             self.__itemQuantity += qty
-            return f"{qty} Quantity Successfully Added!!! \nCurrent Quantity: {self.__itemQuantity}."
+            return True 
+        return False
 
     def sellStock(self,qty):
         if qty<1:
@@ -89,9 +91,11 @@ class StockItem:
             raise ValueError (f"Low Stock!!! Available Quantity: {self.__itemQuantity}")
         # If stock to be sell is valid more than 1 and less or equal to the available stock
         if qty>0 and qty<=self.__itemQuantity:
+            #if condition is met deducts quantity and returns true else return false
             self.__itemQuantity-=qty
-            return(f"{qty} Quantity Successfully Sold!!!\nCurrent Quantity: {self.__itemQuantity}")
-    
+            return True
+        return False
+        
     #dunder method (displays the item information)
     def __str__(self):
         return (
@@ -112,7 +116,7 @@ def displayMenu():
     print(" ----------------------------------------------")
     print("|   Welcome to Car Parts and Accessories Shop  |")
     print(" ----------------------------------------------")
-    print("|             1. Adding New Items             |")
+    print("|             1. Adding New Items              |")
     print("|             2. Modifying Items               |")
     print("|             3. Increase Stock                |")
     print("|             4. Sell Stock                    |")
@@ -222,7 +226,8 @@ price {obj.getItemPrice()} each, and item code {obj.getStockCode()}\n")
                     #to go to the main display menu
                     continue
                 increaseStock= int(input("Enter how many quantity you want to increase: "))
-                print(obj.increaseStock(increaseStock))
+                obj.increaseStock(increaseStock)
+                print(f"{qty} Quantity Successfully Added!!! \nCurrent Quantity: {obj.getItemQuantity}.")
             
             elif choice==4:
                 if obj is None: 
@@ -230,7 +235,8 @@ price {obj.getItemPrice()} each, and item code {obj.getStockCode()}\n")
                     #to go to the main display menu
                     continue
                 sellStock= int(input("Enter how many quantity you want to sell: "))
-                print(obj.sellStock(sellStock))
+                obj.sellStock(sellStock)
+                print((f"{qty} Quantity Successfully Sold!!!\nCurrent Quantity: {obj.getItemQuantity()}"))
             
             elif choice==5:
                 if obj is None: 
