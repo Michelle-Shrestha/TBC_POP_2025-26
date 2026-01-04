@@ -238,7 +238,7 @@ def menu():
 
                 DisplayModifyingItems()
                 #Sub choice for choice modifying items
-                subChoice = int(input("Enter your chocie: "))
+                subChoice = int(input("Enter your choice: "))
                 if subChoice ==1:
                     newStockCode = input("Enter the new code for the item: ")
                     #Settng New Code
