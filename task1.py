@@ -227,7 +227,7 @@ price {obj.getItemPrice()} each, and item code {obj.getStockCode()}\n")
                     continue
                 increaseStock= int(input("Enter how many quantity you want to increase: "))
                 obj.increaseStock(increaseStock)
-                print(f"{qty} Quantity Successfully Added!!! \nCurrent Quantity: {obj.getItemQuantity}.")
+                print(f"{increaseStock} Quantity Successfully Added!!! \nCurrent Quantity: {obj.getItemQuantity()}.")
             
             elif choice==4:
                 if obj is None: 
@@ -236,7 +236,7 @@ price {obj.getItemPrice()} each, and item code {obj.getStockCode()}\n")
                     continue
                 sellStock= int(input("Enter how many quantity you want to sell: "))
                 obj.sellStock(sellStock)
-                print((f"{qty} Quantity Successfully Sold!!!\nCurrent Quantity: {obj.getItemQuantity()}"))
+                print((f"{sellStock} Quantity Successfully Sold!!!\nCurrent Quantity: {obj.getItemQuantity()}"))
             
             elif choice==5:
                 if obj is None: 
