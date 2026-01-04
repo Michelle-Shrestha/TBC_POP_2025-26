@@ -40,7 +40,7 @@ class StockItem:
 
     def setItemPrice(self,itemPrice):
         if itemPrice<=0:
-            raise ValueError ("Invalid Price!!!\n Price must be greater than 0!!!")
+            raise ValueError ("Invalid Price!!!\nPrice must be greater than 0!!!")
         self.__itemPrice = itemPrice
 
     #Getters
@@ -112,7 +112,7 @@ def displayMenu():
     print(" ----------------------------------------------")
     print("|   Welcome to Car Parts and Accessories Shop  |")
     print(" ----------------------------------------------")
-    print("|             1. Adding New  Items             |")
+    print("|             1. Adding New Items             |")
     print("|             2. Modifying Items               |")
     print("|             3. Increase Stock                |")
     print("|             4. Sell Stock                    |")
