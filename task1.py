@@ -164,6 +164,39 @@ def login():
     except FileNotFoundError as fpe:
         print(f"The Error is: {fpe}")
 
+#------------------------------------ End Login User ----------------------------------------------------------
+# ---------------------------------------Sub menu -----------------------------------------------------------
+def subMenu(obj):
+    while True:
+            DisplayModifyingItems()
+            #Sub choice for choice modifying items
+            subChoice = int(input("Enter your chocie: "))
+            if subChoice ==1:
+                newStockCode = input("Enter the new code for the item: ")
+                #Settng New Code
+                obj.setStockCode(newStockCode)
+                print(f"\nSet New Code: {obj.getStockCode()}\n")
+
+            elif subChoice ==2:
+                newQty = int(input("Enter the new quantity for the item: "))
+                #setting new code
+                obj.setItemQuantity(newQty)
+                print(f"\nSetting New Quantity: {obj.getItemQuantity()}\n")
+
+            elif subChoice ==3:
+                newPrice = float(input("Enter the new price for the item: "))
+                #setting new price
+                obj.setItemPrice(newPrice)
+                print(f"\nSetting New Price: {obj.getItemPrice()} per unit\n")
+
+            elif subChoice ==4:
+                print("\nGoing back to the main menu\n")
+                break
+                    
+            #if choose beyond the sub option
+            else:
+                print("\nPlease choose from the given option 1-4 only!!!\n")
+#------------------------------------------ Sub Menu End ------------------------------------------------------------------
 # --------------------------------------- MAIN MENU ------------------------------------------------------
 
 def menu():
@@ -190,34 +223,8 @@ price {obj.getItemPrice()} each, and item code {obj.getStockCode()}\n")
                     print("\nItem doesnot exist. Please add an item!!!\n")
                     #to go to the main display menu
                     continue
-
-                DisplayModifyingItems()
-                #Sub choice for choice modifying items
-                subChoice = int(input("Enter your chocie: "))
-                if subChoice ==1:
-                    newStockCode = input("Enter the new code for the item: ")
-                    #Settng New Code
-                    obj.setStockCode(newStockCode)
-                    print(f"\nSet New Code: {obj.getStockCode()}\n")
-
-                elif subChoice ==2:
-                    newQty = int(input("Enter the new quantity for the item: "))
-                    #setting new code
-                    obj.setItemQuantity(newQty)
-                    print(f"\nSetting New Quantity: {obj.getItemQuantity()}\n")
-
-                elif subChoice ==3:
-                    newPrice = float(input("Enter the new price for the item: "))
-                    #setting new price
-                    obj.setItemPrice(newPrice)
-                    print(f"\nSetting New Price: {obj.getItemPrice()} per unit\n")
-
-                elif subChoice ==4:
-                    continue
-                    
-                #if choose beyond the sub option
-                else:
-                    print("\nPlease choose from the given option 1-4 only!!!\n")
+                #calls the sub menu
+                subMenu(obj)
 
             # Main choice
             elif choice==3:
@@ -256,10 +263,10 @@ price {obj.getItemPrice()} each, and item code {obj.getStockCode()}\n")
 
         #Error handling for the given Errors
         except ValueError as ve:
-            print (f"The Error is: {ve}")
+            print (f"The Error is: {ve}\n")
         except Exception as e:
-            print(f"The Error is: {e}")
+            print(f"The Error is: {e}\n")
         except FileNotFoundError as fpe:
-            print (f"The Error is: {fpe}")
+            print (f"The Error is: {fpe}\n")
 
 menu()
