@@ -209,40 +209,46 @@ def login():
 # ---------------------------------------Sub menu -----------------------------------------------------------
 def subMenu(obj):
     while True:
-            DisplayModifyingItems()
-            #Sub choice for choice modifying items
-            subChoice = int(input("Enter your choice: "))
-            if subChoice ==1:
-                newStockCode = input("Enter the new code for the item: ")
-                #Settng New Code
-                obj.setStockCode(newStockCode)
-                print(f"\nSet New Code: {obj.getStockCode()}\n")
+            try:
+                DisplayModifyingItems()
+                #Sub choice for choice modifying items
+                subChoice = int(input("Enter your choice: "))
+                if subChoice ==1:
+                    newStockCode = input("Enter the new code for the item: ")
+                    #Settng New Code
+                    obj.setStockCode(newStockCode)
+                    print(f"\nSet New Code: {obj.getStockCode()}\n")
 
-            elif subChoice ==2:
-                newQty = int(input("Enter the new quantity for the item: "))
-                #setting new code
-                obj.setItemQuantity(newQty)
-                print(f"\nSetting New Quantity: {obj.getItemQuantity()}\n")
+                elif subChoice ==2:
+                    newQty = int(input("Enter the new quantity for the item: "))
+                    #setting new code
+                    obj.setItemQuantity(newQty)
+                    print(f"\nSetting New Quantity: {obj.getItemQuantity()}\n")
 
-            elif subChoice ==3:
-                newPrice = float(input("Enter the new price for the item: "))
-                #setting new price
-                obj.setItemPrice(newPrice)
-                print(f"\nSetting New Price: {obj.getItemPrice()} per unit\n")
+                elif subChoice ==3:
+                    newPrice = float(input("Enter the new price for the item: "))
+                    #setting new price
+                    obj.setItemPrice(newPrice)
+                    print(f"\nSetting New Price: {obj.getItemPrice()} per unit\n")
 
-            elif subChoice==4:
-                newBrandName= input("Enter the new brand name: ")
-                #Setting new brand name
-                obj.setBrand(newBrandName)
-                print(f"\nSetting New Brand Name: {obj.getBrand()}\n")
+                elif subChoice==4:
+                    newBrandName= input("Enter the new brand name: ")
+                    #Setting new brand name
+                    obj.setBrand(newBrandName)
+                    print(f"\nSetting New Brand Name: {obj.getBrand()}\n")
 
-            elif subChoice ==5:
-                print("\nGoing back to the main menu\n")
-                break
+                elif subChoice ==5:
+                    print("\nGoing back to the main menu\n")
+                    break
 
-            #if choose beyond the sub option    
-            else:
-                print("\nPlease choose from the given option 1-4 only!!!\n")
+                #if choose beyond the sub option    
+                else:
+                    print("\nPlease choose from the given option 1-5 only!!!\n")
+            #Error handling for the given Errors
+            except ValueError as ve:
+                print (f"\nThe Error is: {ve}\n")
+            except Exception as e:
+                print(f"The Error is: {e}\n")
 #------------------------------------------ Sub Menu End ------------------------------------------------------------------
 
 # --------------------------------------- MAIN MENU --------------------------------------------------------------------------
