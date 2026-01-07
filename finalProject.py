@@ -9,17 +9,17 @@ class StockItem:
         self.__itemPrice = itemPrice
 
         #If no stock code added
-        if not stockCode:
+        if not self.__stockCode:
             raise ValueError ("Please enter the stock code!!!")
 
         #Remainder for no quantity and invalid price
-        if itemQuantity<0:
+        if self.__itemQuantity<0:
             print(f"Invalid Quantity: {self.__itemQuantity}")
             raise ValueError("Quantity must be greater than or equal to 0!!!")
 
-        if itemQuantity>100:
+        if self.__itemQuantity>100:
             raise ValueError("Invalid Quantity!!!\nQuantity must be less than or equal to 100!!!")
-        if itemPrice<=0:
+        if self.__itemPrice<=0:
             raise ValueError("Invalid Price!!! Price must be greater than 0")
 
     #Setters
@@ -121,7 +121,7 @@ class NavSys(StockItem):
         super().__init__(stockCode,itemQuantity,itemPrice)
         self.__brand = brand.title()
         #If not brand argument passed
-        if not brand:
+        if not self.__brand:
             raise ValueError("No brand Added!!! Please enter a valid Brand")
 
     #setter
@@ -162,7 +162,8 @@ def displayMenu():
     print("|             3. Increase Stock                |")
     print("|             4. Sell Stock                    |")
     print("|             5. Stock Details                 |")# __str__
-    print("|             6. Exit                          |")
+    print("|             6. Add new user                  |")
+    print("|             7. Exit                          |")
     print(" ----------------------------------------------")
 
 def DisplayModifyingItems():
@@ -205,6 +206,31 @@ def login():
                     print("Username not found\n")
     except FileNotFoundError as fpe:
         print(f"The Error is: {fpe}")
+
+def addUser():
+    print("Add new users: ")
+    username = input("Enter the username: ")
+    password= input("Enter the password: ")
+    if not username:
+        print("Please enter valid username!!!")
+    if not password:
+        print("Please enter valid password!!!")
+
+    try:
+        with open("login.txt","a+") as fp:
+            #resets to the starting of the file
+            fp.seek(0)
+            for line in fp:
+                userN,pw = line.strip().split("|")
+                if username==userN:
+                    print("Username already exist!!!")
+                    return
+            fp.write(f"{username}|{password}\n")
+            print("User added successfully")
+    
+    except FileNotFoundError as fpe:
+        print(f"Error: {fpe}")
+
 #------------------------------------ End Login User ----------------------------------------------------------
 # ---------------------------------------Sub menu -----------------------------------------------------------
 def subMenu(obj):
@@ -310,6 +336,9 @@ def menu():
                 print(obj.__str__())
 
             elif choice==6:
+                addUser()
+                
+            elif choice==7:
                 print("Exiting the program.....\nThank You\n")
                 break
 
