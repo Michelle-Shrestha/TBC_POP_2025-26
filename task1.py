@@ -156,7 +156,7 @@ def login():
                     if log[userName]==password:
                         print("\n Login Successful       \n")
                         #Prints greeting to the current user
-                        print(f" Welcome, {userName.capitalize()}")
+                        print(f" Welcome, {userName}")
                         return True
                     else:
                         print("Incorrect Password!!!\n")
@@ -292,7 +292,7 @@ price {obj.getItemPrice()} each, and item code {obj.getStockCode()}\n")
 
             else:
                 #If choose beyond the givenoption
-                print("Please choose from the given option 1-6 only!!!")   
+                print("Please choose from the given option 1-7 only!!!")   
                 continue    
 
         #Error handling for the given Errors
